@@ -22,6 +22,7 @@ router.get('/:id', (req, res) => {
         [patientId],
         (error, results) => {
             if (error) {
+                console.log(error)
                 res.status(500).json({ error: 'Failed to retrieve patient' });
             } else if (results.length === 0) {
                 res.status(404).json({ error: 'Patient not found' });
@@ -71,6 +72,7 @@ router.post('/', (req, res) => {
         ],
         (error, results) => {
             if (error) {
+                console.log(error)
                 res.status(500).json({ error: 'Failed to create patient' });
             } else {
                 res.status(201).json({ message: 'Patient created successfully' });
@@ -118,6 +120,7 @@ router.put('/:id', (req, res) => {
         ],
         (error, results) => {
             if (error) {
+                console.log(error)
                 res.status(500).json({ error: 'Failed to update patient' });
             } else if (results.affectedRows === 0) {
                 res.status(404).json({ error: 'Patient not found' });
