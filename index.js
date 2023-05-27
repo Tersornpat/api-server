@@ -9,6 +9,7 @@ const factor = require('./api/hospital-factor')
 const inspectionDetail = require('./api/hospital-inspection-detail')
 const listProser = require('./api/hospital-list-proser')
 const mainAction = require('./api/hospital-main-action')
+const myuser = require('./api/hospital-myuser')
 const nLab = require('./api/hospital-n-lab')
 const packageDetail = require('./api/hospital-package-detail')
 const patient = require('./api/hospital-patient')
@@ -51,6 +52,9 @@ app.use('/listProser', listProser)
 //Router /mainAction/
 app.use('/mainAction', mainAction)
 
+//Router /myuser/
+app.use('/myuser', myuser)
+
 //Router /nLab/
 app.use('/nLab', nLab)
 
@@ -76,62 +80,3 @@ app.use('/treatment', treatment)
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
-
-
-
-// const connection = mysql.createConnection({
-//     host: 'tersornpat-db.ckifiguewtro.ap-southeast-1.rds.amazonaws.com',
-//     port: 3306,
-//     user: 'admin',
-//     password: '12345678',
-//     database: 'hospital-model'
-//     });
-
-// connection.connect((err) => {
-// if (err) throw err;
-// console.log('Connected to database');
-// });
-
-// app.get('/', function (req, res) {
-// let json = {
-//     username: 5,
-//     text: "\u201cSorry, we are out of service in this moment\u201d",
-//     time: "2023-03-25 11:10:20",
-//     lottery: [0,1,2,3,4],
-//     morekjs:{
-//         id:777,
-//         codename:{
-//             name:"sornpat",
-//             surname:"Hi"
-//         }
-//     }
-// };
-// res.json(json)
-
-// res.send("Hello This Is Express with React")
-// })
-
-// app.post('/login',async  function (req, res) {
-//     // const { username , password } = req.body;
-
-//     const username = "sornpat";
-//     const password =  2;
-
-//     const sql = 'SELECT * FROM hpt_user WHERE username = ? AND password = ?;';
-
-//     connection.query(sql, [username, password], (err, results) => {
-//         if (err) throw err;
-//         res.json(results);
-//     });
-// })
-
-// app.get('/login',async  function (req, res) {
-//     const sql = 'SELECT * FROM hpt_user;';
-//     connection.query(sql, (err, results) => {
-//     if (err) throw err;
-//     res.json(results);
-//     });
-// })
-
-app.listen(3030)
