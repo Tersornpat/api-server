@@ -32,6 +32,25 @@ router.get('/:id', (req, res) => {
     );
 });
 
+// Retrieve a Bcrypt hashed password by username
+router.get('/:username', (req, res) => {
+    const username = req.params.id;
+
+    db.query(
+        'SELECT Myuser_Password FROM Myuser WHERE Myuser_Username = ?',
+        [username],
+        (error, results) => {
+            if (error) {
+                res.status(500).json({ error: 'Failed to retrieve user' });
+            } else if (results.length === 0) {
+                res.status(404).json({ error: 'User not found' });
+            } else {
+                res.status(200).json(results[0]);
+            }
+        }
+    );
+});
+
 // Create a new user
 router.post('/', (req, res) => {
     const { Employee_ID, Myuser_Username, Myuser_Password, Myuser_Role } = req.body;
