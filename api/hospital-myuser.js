@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
 });
 
 // Retrieve a Bcrypt hashed password by username
-router.get('/:username', (req, res) => {
+router.get('/gethashed/:username', (req, res) => {
     const username = req.params.id;
 
     db.query(
