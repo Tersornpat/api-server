@@ -47,11 +47,12 @@ router.post('/', (req, res) => {
         Patient_Allergic,
         Patient_Disease,
         Patient_TelRelative,
-        Patient_SignDate
+        Patient_SignDate,
+        Employee_ID
     } = req.body;
 
     db.query(
-        'INSERT INTO Patient (Patient_Sex, Patient_Tel1, Patient_Tel2, Patient_Address, Patient_ID, Patient_NRelative, Patient_name, Patient_lname, Patient_BD, Patient_Allergic, Patient_Disease, Patient_TelRelative, Patient_SignDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO Patient (Patient_Sex, Patient_Tel1, Patient_Tel2, Patient_Address, Patient_ID, Patient_NRelative, Patient_name, Patient_lname, Patient_BD, Patient_Allergic, Patient_Disease, Patient_TelRelative, Patient_SignDate, Employee_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
             Patient_Sex,
             Patient_Tel1,
@@ -65,7 +66,8 @@ router.post('/', (req, res) => {
             Patient_Allergic,
             Patient_Disease,
             Patient_TelRelative,
-            Patient_SignDate
+            Patient_SignDate,
+            Employee_ID
         ],
         (error, results) => {
             if (error) {
@@ -92,11 +94,12 @@ router.put('/:id', (req, res) => {
         Patient_Allergic,
         Patient_Disease,
         Patient_TelRelative,
-        Patient_SignDate
+        Patient_SignDate,
+        Employee_ID
     } = req.body;
 
     db.query(
-        'UPDATE Patient SET Patient_Sex = ?, Patient_Tel1 = ?, Patient_Tel2 = ?, Patient_Address = ?, Patient_NRelative = ?, Patient_name = ?, Patient_lname = ?, Patient_BD = ?, Patient_Allergic = ?, Patient_Disease = ?, Patient_TelRelative = ?, Patient_SignDate = ? WHERE Patient_ID = ?',
+        'UPDATE Patient SET Patient_Sex = ?, Patient_Tel1 = ?, Patient_Tel2 = ?, Patient_Address = ?, Patient_NRelative = ?, Patient_name = ?, Patient_lname = ?, Patient_BD = ?, Patient_Allergic = ?, Patient_Disease = ?, Patient_TelRelative = ?, Patient_SignDate = ?, Employee_ID = ? WHERE Patient_ID = ?',
         [
             Patient_Sex,
             Patient_Tel1,
@@ -110,6 +113,7 @@ router.put('/:id', (req, res) => {
             Patient_Disease,
             Patient_TelRelative,
             Patient_SignDate,
+            Employee_ID,
             patientId
         ],
         (error, results) => {
