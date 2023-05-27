@@ -33,6 +33,26 @@ router.get('/:id', (req, res) => {
     );
 });
 
+// Retrieve a specific patient by ID
+router.get('/getwithempinfo/:id', (req, res) => {
+    const patientId = req.params.id;
+
+    db.query(
+        'SELECT * FROM Patient JOIN Employee ON Patient.Employee_ID = Employee.Employee_IDWHERE Patient.Patient_ID = ?;',
+        [patientId],
+        (error, results) => {
+            if (error) {
+                console.log(error)
+                res.status(500).json({ error: 'Failed to retrieve patient' });
+            } else if (results.length === 0) {
+                res.status(404).json({ error: 'Patient not found' });
+            } else {
+                res.status(200).json(results[0]);
+            }
+        }
+    );
+});
+
 // Create a new patient
 router.post('/', (req, res) => {
     const {
