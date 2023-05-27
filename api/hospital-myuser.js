@@ -69,13 +69,13 @@ router.post('/', (req, res) => {
 });
 
 // Update a user
-router.put('/:id', (req, res) => {
-    const userId = req.params.id;
+router.put('/:username', (req, res) => {
+    const username = req.params.username;
     const { Myuser_Username, Myuser_Password, Myuser_Role } = req.body;
 
     db.query(
-        'UPDATE Myuser SET Myuser_Username = ?, Myuser_Password = ?, Myuser_Role = ? WHERE Myuser_ID = ?',
-        [Myuser_Username, Myuser_Password, Myuser_Role, userId],
+        'UPDATE Myuser SET Myuser_Username = ?, Myuser_Password = ?, Myuser_Role = ? WHERE Myuser_Username = ?',
+        [Myuser_Username, Myuser_Password, Myuser_Role, username],
         (error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Failed to update user' });
@@ -89,12 +89,12 @@ router.put('/:id', (req, res) => {
 });
 
 // Delete a user
-router.delete('/:id', (req, res) => {
-    const userId = req.params.id;
+router.delete('/:username', (req, res) => {
+    const username = req.params.username;
 
     db.query(
-        'DELETE FROM Myuser WHERE Myuser_ID = ?',
-        [userId],
+        'DELETE FROM Myuser WHERE Myuser_Username = ?',
+        [username],
         (error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Failed to delete user' });
