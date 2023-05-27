@@ -13,13 +13,13 @@ router.get('/', (req, res) => {
     });
 });
 
-// Retrieve a specific user by ID
-router.get('/:id', (req, res) => {
-    const userId = req.params.id;
+// Retrieve a specific user by username
+router.get('/:username', (req, res) => {
+    const username = req.params.username;
 
     db.query(
-        'SELECT * FROM Myuser WHERE Myuser_ID = ?',
-        [userId],
+        'SELECT * FROM Myuser WHERE Myuser_Username = ?',
+        [username],
         (error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Failed to retrieve user' });
