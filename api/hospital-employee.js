@@ -35,6 +35,7 @@ router.get('/:id', (req, res) => {
 // Retrieve a specific employee with join position and department by ID
 router.get('/getemp-po-de/:id', (req, res) => {
     const employeeId = req.params.id;
+    console.log("come")
 
     db.query(
         'SELECT Employee.Employee_ID, Employee.Employee_name, Employee.Employee_Lname, Employee.Employee_sex, Employee.Employee_tel1, Employee.Employee_tel2, Employee.Employee_SP, Employee.Position_ID, Employee.Department_ID, Employee.Employee_Lang, Department.Department_name, Position.Position_Name From Employee, Department, Position WHERE Employee.Employee_ID = ?',
