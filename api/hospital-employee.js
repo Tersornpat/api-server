@@ -38,7 +38,7 @@ router.get('/getemp-po-de/:id', (req, res) => {
     console.log("come")
 
     db.query(
-        'SELECT Employee.Employee_ID, Employee.Employee_name, Employee.Employee_Lname, Employee.Employee_sex, Employee.Employee_tel1, Employee.Employee_tel2, Employee.Employee_SP, Employee.Position_ID, Employee.Department_ID, Employee.Employee_Lang, Department.Department_name, Position.Position_Name From Employee, Department, Position WHERE Employee.Employee_ID = ?',
+        'SELECT Employee.Employee_ID, Employee.Employee_name, Employee.Employee_Lname, Employee.Employee_sex, Employee.Employee_tel1, Employee.Employee_tel2, Employee.Employee_SP, Employee.Position_ID, Employee.Department_ID, Employee.Employee_Lang, Employee.Employee_Image, Department.Department_name, Position.Position_Name From Employee, Department, Position WHERE Employee.Employee_ID = ?',
         [employeeId],
         (error, results) => {
             if (error) {
@@ -54,11 +54,11 @@ router.get('/getemp-po-de/:id', (req, res) => {
 
 // Create a new employee
 router.post('/', (req, res) => {
-    const { Employee_ID, Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang } = req.body;
+    const { Employee_ID, Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang, Employee_Image } = req.body;
 
     db.query(
-        'INSERT INTO Employee (Employee_ID, Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [Employee_ID, Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang],
+        'INSERT INTO Employee (Employee_ID, Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang , Employee_Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [Employee_ID, Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang, Employee_Image],
         (error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Failed to create employee' });
@@ -72,11 +72,11 @@ router.post('/', (req, res) => {
 // Update an employee
 router.put('/:id', (req, res) => {
     const employeeId = req.params.id;
-    const { Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang } = req.body;
+    const { Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang, Employee_Image } = req.body;
 
     db.query(
-        'UPDATE Employee SET Employee_name = ?, Employee_Lname = ?, Employee_sex = ?, Employee_tel1 = ?, Employee_tel2 = ?, Employee_SP = ?, Position_ID = ?, Department_ID = ?, Employee_Lang = ? WHERE Employee_ID = ?',
-        [Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang, employeeId],
+        'UPDATE Employee SET Employee_name = ?, Employee_Lname = ?, Employee_sex = ?, Employee_tel1 = ?, Employee_tel2 = ?, Employee_SP = ?, Position_ID = ?, Department_ID = ?, Employee_Lang = ?, Employee_Image = ? WHERE Employee_ID = ?',
+        [Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang, Employee_Image, employeeId],
         (error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Failed to update employee' });
