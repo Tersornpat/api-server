@@ -52,6 +52,27 @@ router.get('/getemp-po-de/:id', (req, res) => {
     );
 });
 
+// Retrieve a specific employee with join position and department by ID
+router.get('/getempis/:positionName', (req, res) => {
+    const positionName = req.params.positionName;
+    console.log("come")
+
+    db.query(
+        'SELECT Employee.Employee_ID, Employee.Employee_name, Employee.Employee_Lname, Employee.Employee_sex, Employee.Employee_tel1, Employee.Employee_tel2, Employee.Employee_SP, Employee.Position_ID, Employee.Department_ID, Employee.Employee_Lang, Employee.Employee_Image, Department.Department_name, Position.Position_Name From Employee, Department, Position WHERE Position.Position_Name = ?',
+        [positionName],
+        (error, results) => {
+            if (error) {
+                res.status(500).json({ error: 'Failed to retrieve employee' });
+            } else if (results.length === 0) {
+                res.status(404).json({ error: 'Employee not found' });
+            } else {
+                res.status(200).json(results[0]);
+            }
+        }
+    );
+});
+
+
 // Create a new employee
 router.post('/', (req, res) => {
     const { Employee_ID, Employee_name, Employee_Lname, Employee_sex, Employee_tel1, Employee_tel2, Employee_SP, Position_ID, Department_ID, Employee_Lang, Employee_Image } = req.body;
