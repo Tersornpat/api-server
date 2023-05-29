@@ -13,29 +13,28 @@ router.get('/', (req, res) => {
     });
 });
 
-// Retrieve a specific employee by ID
-router.get('/:id', (req, res) => {
-    const employeeId = req.params.id;
+// // Retrieve a specific employee by ID
+// router.get('/:id', (req, res) => {
+//     const employeeId = req.params.id;
 
-    db.query(
-        'SELECT * FROM Employee WHERE Employee_ID = ?',
-        [employeeId],
-        (error, results) => {
-            if (error) {
-                res.status(500).json({ error: 'Failed to retrieve employee' });
-            } else if (results.length === 0) {
-                res.status(404).json({ error: 'Employee not found' });
-            } else {
-                res.status(200).json(results[0]);
-            }
-        }
-    );
-});
+//     db.query(
+//         'SELECT * FROM Employee WHERE Employee_ID = ?',
+//         [employeeId],
+//         (error, results) => {
+//             if (error) {
+//                 res.status(500).json({ error: 'Failed to retrieve employee' });
+//             } else if (results.length === 0) {
+//                 res.status(404).json({ error: 'Employee not found' });
+//             } else {
+//                 res.status(200).json(results[0]);
+//             }
+//         }
+//     );
+// });
 
 // Retrieve a specific employee with join position and department by ID
-router.get('/getemp-po-de/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const employeeId = req.params.id;
-    console.log("come")
 
     db.query(
         'SELECT Employee.*, Position.Position_Name, Department.Department_name From Employee INNER JOIN Position on Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Employee.Employee_ID = ?',
