@@ -36,12 +36,14 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const { Position_ID, Position_Name } = req.body;
 
+    console.log(Position_ID,Position_Name)
+
     db.query(
         'INSERT INTO Position (Position_ID, Position_Name) VALUES (?, ?)',
         [Position_ID, Position_Name],
         (error, results) => {
             if (error) {
-                res.status(500).json({ error: 'Failed to create department' });
+                res.status(500).json({ error: 'Failed to create Position' });
             } else {
                 res.status(201).json({ message: 'Department created successfully' });
             }
