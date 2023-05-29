@@ -57,7 +57,7 @@ router.get('/getempis/:positionName', (req, res) => {
     const positionName = req.params.positionName;
 
     db.query(
-        'SELECT * From Employee INNER JOIN Position on Employee.Position_ID = Position.Position_ID WHERE Position.Position_Name = ?',
+        'SELECT DISTINCT Employee.*, Position.Position_Name, Department.Department_name FROM Employee INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Position.Position_Name = ?;',
         [positionName],
         (error, results) => {
             if (error) {
