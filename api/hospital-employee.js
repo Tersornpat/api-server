@@ -51,7 +51,7 @@ router.get('/:id', (req, res) => {
     );
 });
 
-// Retrieve a specific employee with join position and department by ID
+// Retrieve a specific employee by position_id
 router.get('/getemppos/:positionName', (req, res) => {
     const positionName = req.params.positionName;
 
@@ -70,7 +70,7 @@ router.get('/getemppos/:positionName', (req, res) => {
     );
 });
 
-// Retrieve a specific employee with join position and department by ID
+// Retrieve a specific employee by department_id
 router.get('/getempdep/:departmentName', (req, res) => {
     const departmentName = req.params.departmentName;
 
@@ -89,7 +89,7 @@ router.get('/getempdep/:departmentName', (req, res) => {
     );
 });
 
-// Retrieve a specific employee with join position and department by ID
+// Retrieve a specific employee by position_id and department_id
 router.get('/:positionName/:departmentName', (req, res) => {
     const positionName = req.params.positionName;
     const departmentName = req.params.departmentName;

@@ -38,7 +38,7 @@ router.get('/getwithempinfo/:id', (req, res) => {
     const patientId = req.params.id;
 
     db.query(
-        'Select Patient.Patient_Sex, Patient.Patient_Tel1, Patient.Patient_Tel2, Patient.Patient_Address, Patient.Patient_ID, Patient.Patient_NRelative, Patient.Patient_name, Patient.Patient_lname, Patient.Patient_BD, Patient.Patient_Allergic, Patient.Patient_Disease, Patient.Patient_TelRelative, Patient.Patient_SignDate, Employee.Employee_ID ,Employee.Employee_name, Employee.Employee_Lname, Employee.Employee_sex, Employee.Employee_tel1, Employee.Employee_tel2, Employee.Employee_SP, Employee.Position_ID, Employee.Department_ID from Patient, Employee WHERE Patient.Patient_ID = ? AND Patient.Employee_ID = Employee.Employee_ID;',
+        'SELECT Patient.*, Employee.Employee_name,Employee.Employee_Lname,Employee.Employee_sex,Employee.Employee_tel1,Employee.Employee_tel2,Employee.Employee_SP ,Employee.Employee_Lang ,Employee.Position_ID,Employee.Department_ID FROM Patient INNER JOIN Employee ON Patient.Employee_ID = Employee.Employee_ID WHERE Patient.Patient_ID = ?;',
         [patientId],
         (error, results) => {
             if (error) {
