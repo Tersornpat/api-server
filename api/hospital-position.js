@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
     console.log(Position_ID,Position_Name)
 
     db.query(
-        'INSERT INTO Position (Position_ID, Position_Name) VALUES (?, ?);',
+        'INSERT INTO Position (Position_ID, Position_Name) VALUES (?, ?)',
         [Position_ID, Position_Name],
         (error, results) => {
             if (error) {
