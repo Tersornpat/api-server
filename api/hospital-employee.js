@@ -90,6 +90,27 @@ router.get('/getempdep/:departmentName', (req, res) => {
     );
 });
 
+// Retrieve a specific employee with join position and department by ID
+router.get('/getempdep/:positionName/:departmentName', (req, res) => {
+    const positionName = req.params.positionName;
+    const departmentName = req.params.departmentName;
+
+    db.query(
+        'SELECT DISTINCT Employee.*, Position.Position_Name, Department.Department_name FROM Employee INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Position.Position_Name = ? AND Department.Department_Name = ?;',
+        [positionName, departmentName],
+        (error, results) => {
+            if (error) {
+                res.status(500).json({ error: 'Failed to retrieve employee' });
+            } else if (results.length === 0) {
+                res.status(404).json({ error: 'Employee not found' });
+            } else {
+                res.status(200).json(results);
+            }
+        }
+    );
+});
+
+
 
 // Create a new employee
 router.post('/', (req, res) => {
