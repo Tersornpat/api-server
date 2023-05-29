@@ -91,7 +91,7 @@ router.get('/getempdep/:departmentName', (req, res) => {
 });
 
 // Retrieve a specific employee with join position and department by ID
-router.get('/getempdep/:positionName/:departmentName', (req, res) => {
+router.get('/:positionName/:departmentName', (req, res) => {
     const positionName = req.params.positionName;
     const departmentName = req.params.departmentName;
 
