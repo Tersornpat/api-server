@@ -57,7 +57,7 @@ router.get('/getemppos/:positionName', (req, res) => {
     const positionName = req.params.positionName;
 
     db.query(
-        'SELECT DISTINCT Employee.*, Position.Position_Name, Department.Department_name FROM Employee INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Position.Position_Name = ?;',
+        'SELECT Employee.*, Position.Position_Name, Department.Department_name FROM Employee INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Position.Position_Name = ?;',
         [positionName],
         (error, results) => {
             if (error) {
@@ -76,7 +76,7 @@ router.get('/getempdep/:departmentName', (req, res) => {
     const departmentName = req.params.departmentName;
 
     db.query(
-        'SELECT DISTINCT Employee.*, Position.Position_Name, Department.Department_name FROM Employee INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Department.Department_Name = ?;',
+        'SELECT Employee.*, Position.Position_Name, Department.Department_name FROM Employee INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Department.Department_Name = ?;',
         [departmentName],
         (error, results) => {
             if (error) {
@@ -96,7 +96,7 @@ router.get('/getempdep/:positionName/:departmentName', (req, res) => {
     const departmentName = req.params.departmentName;
 
     db.query(
-        'SELECT DISTINCT Employee.*, Position.Position_Name, Department.Department_name FROM Employee INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Position.Position_Name = ? AND Department.Department_Name = ?;',
+        'SELECT Employee.*, Position.Position_Name, Department.Department_name FROM Employee INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Position.Position_Name = ? AND Department.Department_Name = ?;',
         [positionName, departmentName],
         (error, results) => {
             if (error) {
