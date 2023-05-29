@@ -38,7 +38,7 @@ router.get('/getemp-po-de/:id', (req, res) => {
     console.log("come")
 
     db.query(
-        'SELECT Employee.Employee_ID, Employee.Employee_name, Employee.Employee_Lname, Employee.Employee_sex, Employee.Employee_tel1, Employee.Employee_tel2, Employee.Employee_SP, Employee.Position_ID, Employee.Department_ID, Employee.Employee_Lang, Employee.Employee_Image, Department.Department_name, Position.Position_Name From Employee INNER JOIN Position on Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Employee.Employee_ID = ?',
+        'SELECT Employee.*, Position.Position_Name, Department.Department_name From Employee INNER JOIN Position on Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Employee.Employee_ID = ?',
         [employeeId],
         (error, results) => {
             if (error) {
@@ -53,12 +53,31 @@ router.get('/getemp-po-de/:id', (req, res) => {
 });
 
 // Retrieve a specific employee with join position and department by ID
-router.get('/getempis/:positionName', (req, res) => {
+router.get('/getemppos/:positionName', (req, res) => {
     const positionName = req.params.positionName;
 
     db.query(
         'SELECT DISTINCT Employee.*, Position.Position_Name, Department.Department_name FROM Employee INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Position.Position_Name = ?;',
         [positionName],
+        (error, results) => {
+            if (error) {
+                res.status(500).json({ error: 'Failed to retrieve employee' });
+            } else if (results.length === 0) {
+                res.status(404).json({ error: 'Employee not found' });
+            } else {
+                res.status(200).json(results);
+            }
+        }
+    );
+});
+
+// Retrieve a specific employee with join position and department by ID
+router.get('/getempdep/:departmentName', (req, res) => {
+    const departmentName = req.params.departmentName;
+
+    db.query(
+        'SELECT DISTINCT Employee.*, Position.Position_Name, Department.Department_name FROM Employee INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Department.Department_Name = ?;',
+        [departmentName],
         (error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Failed to retrieve employee' });
