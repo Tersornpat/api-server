@@ -42,7 +42,6 @@ router.post('/', (req, res) => {
         'INSERT INTO Position (Position_ID, Position_Name) VALUES (?, ?);',
         [Position_ID, Position_Name],
         (error, results) => {
-            console.log(error)
             if (error) {
                 res.status(500).json({ error: 'Failed to create Position' });
             } else {
