@@ -41,6 +41,7 @@ router.post('/', (req, res) => {
         [Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp],
         (error, results) => {
             if (error) {
+                console.log(error)
                 res.status(500).json({ error: 'Failed to create report' });
             } else {
                 res.status(201).json({ message: 'Report created successfully' });
