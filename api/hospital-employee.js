@@ -13,24 +13,24 @@ router.get('/', (req, res) => {
     });
 });
 
-// // Retrieve a specific employee by ID
-// router.get('/:id', (req, res) => {
-//     const employeeId = req.params.id;
+// Retrieve a specific employee by ID
+router.get('/:id', (req, res) => {
+    const employeeId = req.params.id;
 
-//     db.query(
-//         'SELECT * FROM Employee WHERE Employee_ID = ?',
-//         [employeeId],
-//         (error, results) => {
-//             if (error) {
-//                 res.status(500).json({ error: 'Failed to retrieve employee' });
-//             } else if (results.length === 0) {
-//                 res.status(404).json({ error: 'Employee not found' });
-//             } else {
-//                 res.status(200).json(results[0]);
-//             }
-//         }
-//     );
-// });
+    db.query(
+        'SELECT * FROM Employee WHERE Employee_ID = ?',
+        [employeeId],
+        (error, results) => {
+            if (error) {
+                res.status(500).json({ error: 'Failed to retrieve employee' });
+            } else if (results.length === 0) {
+                res.status(404).json({ error: 'Employee not found' });
+            } else {
+                res.status(200).json(results[0]);
+            }
+        }
+    );
+});
 
 // Retrieve a specific employee with join position and department by ID
 router.get('/:id', (req, res) => {
