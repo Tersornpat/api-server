@@ -34,11 +34,11 @@ router.get('/:id', (req, res) => {
 
 // Create a new report
 router.post('/', (req, res) => {
-    const { Report_ID, Patient_ID, Employee_ID, Report_Date } = req.body;
+    const { Report_ID, Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp } = req.body;
 
     db.query(
-        'INSERT INTO Report (Report_ID, Patient_ID, Employee_ID, Report_Date) VALUES (?, ?, ?, ?)',
-        [Report_ID, Patient_ID, Employee_ID, Report_Date],
+        'INSERT INTO Report (Report_ID, Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [Report_ID, Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp],
         (error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Failed to create report' });
@@ -52,11 +52,11 @@ router.post('/', (req, res) => {
 // Update a report
 router.put('/:id', (req, res) => {
     const reportId = req.params.id;
-    const { Patient_ID, Employee_ID, Report_Date } = req.body;
+    const { Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp } = req.body;
 
     db.query(
-        'UPDATE Report SET Patient_ID = ?, Employee_ID = ?, Report_Date = ? WHERE Report_ID = ?',
-        [Patient_ID, Employee_ID, Report_Date, reportId],
+        'UPDATE Report SET Patient_ID = ?, Employee_ID = ?, Report_Date = ?, weight = ?, height = ?, Pressure = ?, BPM = ?, Temp = ? WHERE Report_ID = ?',
+        [Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp, reportId],
         (error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Failed to update report' });
