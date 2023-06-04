@@ -16,6 +16,8 @@ const patient = require('./api/hospital-patient')
 const position = require('./api/hospital-position')
 const proserType = require('./api/hospital-proser-type')
 const proser = require('./api/hospital-proser')
+const report = require('./api/hospital-report')
+const reportDetail = require('./api/hospital-reportdetail')
 const treatment = require('./api/hospital-treatment')
 
 
@@ -72,6 +74,12 @@ app.use('/proserType', proserType)
 
 //Router /proser/
 app.use('/proser', proser)
+
+//Router /report/
+app.use('/report', report)
+
+//Router /reportDetail/
+app.use('/reportDetail', reportDetail)
 
 //Router /treatment/
 app.use('/treatment', treatment)
