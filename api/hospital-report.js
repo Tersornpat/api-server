@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
     const reportId = req.params.id;
 
     db.query(
-        'SELECT * FROM Report WHERE Report_ID = ?',
+        'SELECT Report.Report_ID,Report.Report_Date,Report.weight,Report.height,Report.Pressure,Report.BPM,Report.Temp,Employee.*,Patient.* FROM Report INNER JOIN Employee ON Report.Employee_ID = Employee.Employee_ID INNER JOIN Patient ON Report.Patient_ID = Patient.Patient_ID WHERE Report_ID = ?',
         [reportId],
         (error, results) => {
             if (error) {
