@@ -34,11 +34,11 @@ router.get('/:id', (req, res) => {
 
 // Create a new report
 router.post('/', (req, res) => {
-    const { Report_ID, Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp } = req.body;
+    const { Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp } = req.body;
 
     db.query(
-        'INSERT INTO Report (Report_ID, Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        [Report_ID, Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp],
+        'INSERT INTO Report (Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp],
         (error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Failed to create report' });
