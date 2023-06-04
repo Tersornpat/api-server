@@ -33,25 +33,25 @@ router.get('/:id', (req, res) => {
     );
 });
 
-// // Retrieve a specific patient by ID
-// router.get('/getwithempinfo/:id', (req, res) => {
-//     const patientId = req.params.id;
+// Retrieve a specific patient by ID
+router.get('/getwithempinfo/:id', (req, res) => {
+    const patientId = req.params.id;
 
-//     db.query(
-//         'SELECT Patient.*, Employee.Employee_name,Employee.Employee_Lname,Employee.Employee_sex,Employee.Employee_tel1,Employee.Employee_tel2,Employee.Employee_SP ,Employee.Employee_Lang ,Employee.Position_ID,Employee.Department_ID FROM Patient INNER JOIN Employee ON Patient.Employee_ID = Employee.Employee_ID WHERE Patient.Patient_ID = ?;',
-//         [patientId],
-//         (error, results) => {
-//             if (error) {
-//                 console.log(error)
-//                 res.status(500).json({ error: 'Failed to retrieve patient' });
-//             } else if (results.length === 0) {
-//                 res.status(404).json({ error: 'Patient not found' });
-//             } else {
-//                 res.status(200).json(results[0]);
-//             }
-//         }
-//     );
-// });
+    db.query(
+        'SELECT Patient.*, Employee.Employee_name,Employee.Employee_Lname,Employee.Employee_sex,Employee.Employee_tel1,Employee.Employee_tel2,Employee.Employee_SP ,Employee.Employee_Lang ,Employee.Position_ID,Employee.Department_ID FROM Patient INNER JOIN Employee ON Patient.Employee_ID = Employee.Employee_ID WHERE Patient.Patient_ID = ?;',
+        [patientId],
+        (error, results) => {
+            if (error) {
+                console.log(error)
+                res.status(500).json({ error: 'Failed to retrieve patient' });
+            } else if (results.length === 0) {
+                res.status(404).json({ error: 'Patient not found' });
+            } else {
+                res.status(200).json(results[0]);
+            }
+        }
+    );
+});
 
 // Create a new patient
 router.post('/', (req, res) => {
@@ -69,11 +69,15 @@ router.post('/', (req, res) => {
         Patient_Disease,
         Patient_TelRelative,
         Patient_SignDate,
+        BG,
+        Patient_National,
+        Patient_Citizen,
+        Patient_Email,
         Employee_ID
     } = req.body;
 
     db.query(
-        'INSERT INTO Patient (Patient_Sex, Patient_Tel1, Patient_Tel2, Patient_Address, Patient_ID, Patient_NRelative, Patient_name, Patient_lname, Patient_BD, Patient_Allergic, Patient_Disease, Patient_TelRelative, Patient_SignDate, Employee_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        'INSERT INTO Patient (Patient_Sex, Patient_Tel1, Patient_Tel2, Patient_Address, Patient_ID, Patient_NRelative, Patient_name, Patient_lname, Patient_BD, Patient_Allergic, Patient_Disease, Patient_TelRelative, Patient_SignDate,BG, Patient_National, Patient_Citizen, Patient_Email, Employee_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         [
             Patient_Sex,
             Patient_Tel1,
@@ -88,6 +92,10 @@ router.post('/', (req, res) => {
             Patient_Disease,
             Patient_TelRelative,
             Patient_SignDate,
+            BG,
+            Patient_National,
+            Patient_Citizen,
+            Patient_Email,
             Employee_ID
         ],
         (error, results) => {
@@ -117,11 +125,15 @@ router.put('/:id', (req, res) => {
         Patient_Disease,
         Patient_TelRelative,
         Patient_SignDate,
+        BG,
+        Patient_National,
+        Patient_Citizen,
+        Patient_Email,
         Employee_ID
     } = req.body;
 
     db.query(
-        'UPDATE Patient SET Patient_Sex = ?, Patient_Tel1 = ?, Patient_Tel2 = ?, Patient_Address = ?, Patient_NRelative = ?, Patient_name = ?, Patient_lname = ?, Patient_BD = ?, Patient_Allergic = ?, Patient_Disease = ?, Patient_TelRelative = ?, Patient_SignDate = ?, Employee_ID = ? WHERE Patient_ID = ?',
+        'UPDATE Patient SET Patient_Sex = ?, Patient_Tel1 = ?, Patient_Tel2 = ?, Patient_Address = ?, Patient_NRelative = ?, Patient_name = ?, Patient_lname = ?, Patient_BD = ?, Patient_Allergic = ?, Patient_Disease = ?, Patient_TelRelative = ?, Patient_SignDate = ?,BG = ?, Patient_National = ?, Patient_Citizen, Patient_Email, Employee_ID = ? WHERE Patient_ID = ?',
         [
             Patient_Sex,
             Patient_Tel1,
@@ -136,6 +148,10 @@ router.put('/:id', (req, res) => {
             Patient_TelRelative,
             Patient_SignDate,
             Employee_ID,
+            BG,
+            Patient_National,
+            Patient_Citizen,
+            Patient_Email,
             patientId
         ],
         (error, results) => {
