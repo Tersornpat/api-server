@@ -53,6 +53,26 @@ router.get('/getwithempinfo/:id', (req, res) => {
     );
 });
 
+// Find Patient_ID by Citizen
+router.get('/getidbycitizen/:citizen', (req, res) => {
+    const citizen = req.params.citizen;
+
+    db.query(
+        'SELECT Patient.Patient_ID From Patient WHERE Patient_Citizen = ?;',
+        [citizen],
+        (error, results) => {
+            if (error) {
+                console.log(error)
+                res.status(500).json({ error: 'Failed to retrieve patient' });
+            } else if (results.length === 0) {
+                res.status(404).json({ error: 'Patient not found' });
+            } else {
+                res.status(200).json(results[0]);
+            }
+        }
+    );
+});
+
 // Create a new patient
 router.post('/', (req, res) => {
     const {
