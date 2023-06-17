@@ -18,8 +18,9 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const appointmentId = req.params.id;
 
+    console.log("SELECT * FROM Appoint WHERE Appoint_ID = ?")
     db.query(
-        'SELECT * FROM Appoint WHERE Appoint_ID = ?',
+        'SET GLOBAL FOREIGN_KEY_CHECKS=0;',
         [appointmentId],
         (error, results) => {
             if (error) {
