@@ -6,6 +6,7 @@ const db = require('../ConnectDB');
 router.get('/', (req, res) => {
     db.query('SELECT * FROM Appoint', (error, results) => {
         if (error) {
+            console.log(error)
             res.status(500).json({ error: 'Failed to retrieve Appointments' });
         } else {
             res.status(200).json(results);
@@ -22,6 +23,7 @@ router.get('/:id', (req, res) => {
         [appointmentId],
         (error, results) => {
             if (error) {
+                console.log(error)
                 res.status(500).json({ error: 'Failed to retrieve Appointment' });
             } else if (results.length === 0) {
                 res.status(404).json({ error: 'Appointment not found' });
@@ -60,6 +62,7 @@ router.put('/:id', (req, res) => {
         [Employee_ID, Patient_ID, Report_ID, appointmentId],
         (error, results) => {
             if (error) {
+                console.log(error)
                 res.status(500).json({ error: 'Failed to update Appointment' });
             } else if (results.affectedRows === 0) {
                 res.status(404).json({ error: 'Appointment not found' });
@@ -79,6 +82,7 @@ router.delete('/:id', (req, res) => {
         [appointmentId],
         (error, results) => {
             if (error) {
+                console.log(error)
                 res.status(500).json({ error: 'Failed to delete Appointment' });
             } else if (results.affectedRows === 0) {
                 res.status(404).json({ error: 'Appointment not found' });
