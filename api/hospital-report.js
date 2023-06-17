@@ -4,7 +4,7 @@ const db = require('../ConnectDB');
 
 // Retrieve all reports
 router.get('/', (req, res) => {
-    db.query('SELECT * FROM Report', (error, results) => {
+    db.query('SELECT Report.*,Patient.Patient_Name,Patient.Patient_Citizen FROM Report JOIN Patient ON Report.Patient_ID = Patient.Patient_ID;', (error, results) => {
         if (error) {
             res.status(500).json({ error: 'Failed to retrieve reports' });
         } else {
@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
     const reportId = req.params.id;
 
     db.query(
-        'SELECT Report.Report_ID,Report.Report_Date,Report.weight,Report.height,Report.Pressure,Report.BPM,Report.Temp,Report.Symptom,Employee.*,Patient.Patient_ID,Patient.Patient_Sex,Patient.Patient_Tel1,Patient.Patient_Tel2,Patient.Patient_Address,Patient.Patient_NRelative,Patient.Patient_name,Patient.Patient_lname,Patient.Patient_BD,Patient.Patient_Allergic,Patient.Patient_Disease,Patient.Patient_TelRelative,Patient.Patient_SignDate,Patient.Patient_National,Patient.Patient_Citizen,Patient.Patient_Email,Department.Department_Name,Position.Position_Name FROM Report INNER JOIN Employee ON Report.Employee_ID = Employee.Employee_ID INNER JOIN Patient ON Report.Patient_ID = Patient.Patient_ID INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Report_ID = ?',
+        'SELECT Report.Report_ID,Report.Report_Date,Report.weight,Report.height,Report.Pressure,Report.BPM,Report.Temp,Report.Symptom,Report.Status,Employee.*,Patient.Patient_ID,Patient.Patient_Sex,Patient.Patient_Tel1,Patient.Patient_Tel2,Patient.Patient_Address,Patient.Patient_NRelative,Patient.Patient_name,Patient.Patient_lname,Patient.Patient_BD,Patient.Patient_Allergic,Patient.Patient_Disease,Patient.Patient_TelRelative,Patient.Patient_SignDate,Patient.Patient_National,Patient.Patient_Citizen,Patient.Patient_Email,Department.Department_Name,Position.Position_Name FROM Report INNER JOIN Employee ON Report.Employee_ID = Employee.Employee_ID INNER JOIN Patient ON Report.Patient_ID = Patient.Patient_ID INNER JOIN Position ON Employee.Position_ID = Position.Position_ID INNER JOIN Department ON Employee.Department_ID = Department.Department_ID WHERE Report_ID = ?',
         [reportId],
         (error, results) => {
             if (error) {
@@ -53,11 +53,11 @@ router.post('/', (req, res) => {
 // Update a report
 router.put('/:id', (req, res) => {
     const reportId = req.params.id;
-    const { Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp, Symptom } = req.body;
+    const { Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp, Symptom, Status } = req.body;
 
     db.query(
-        'UPDATE Report SET Patient_ID = ?, Employee_ID = ?, Report_Date = ?, weight = ?, height = ?, Pressure = ?, BPM = ?, Temp = ?, Symptom = ? WHERE Report_ID = ?',
-        [Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp, Symptom, reportId],
+        'UPDATE Report SET Patient_ID = ?, Employee_ID = ?, Report_Date = ?, weight = ?, height = ?, Pressure = ?, BPM = ?, Temp = ?, Symptom = ?, Status = ? WHERE Report_ID = ?',
+        [Patient_ID, Employee_ID, Report_Date, weight, height, Pressure, BPM, Temp, Symptom, Status, reportId],
         (error, results) => {
             if (error) {
                 res.status(500).json({ error: 'Failed to update report' });

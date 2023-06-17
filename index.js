@@ -3,6 +3,7 @@ const app = express()
 const db = require('./ConnectDB');
 const cors = require('cors');
 
+const appoint = require('./api/hospital-appoint')
 const department = require('./api/hospital-department')
 const employee = require('./api/hospital-employee')
 const factor = require('./api/hospital-factor')
@@ -25,7 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const port = 4000;
 
-
 app.get('/', (req, res) => {
     console.log("GET index")
     res.send("GET INDEX");
@@ -34,6 +34,9 @@ app.post('/', (req, res) => {
     console.log("POST index")
     res.send("POST INDEX");
 });
+
+//Router /appoint/
+app.use('/appoint', appoint)
 
 //Router /department/
 app.use('/department', department)
