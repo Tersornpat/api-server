@@ -6,7 +6,7 @@ const db = require('../ConnectDB');
 router.get('/', (req, res) => {
     db.query('SELECT * FROM Appoint', (error, results) => {
         if (error) {
-            console.log(error)
+            
             res.status(500).json({ error: 'Failed to retrieve Appointments' });
         } else {
             res.status(200).json(results);
@@ -18,13 +18,12 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     const appointmentId = req.params.id;
 
-    console.log("SELECT * FROM Appoint WHERE Appoint_ID = ?")
     db.query(
-        'SET GLOBAL FOREIGN_KEY_CHECKS=0;',
+        'SELECT * FROM Appoint WHERE Appoint_ID = ?',
         [appointmentId],
         (error, results) => {
             if (error) {
-                console.log(error)
+                
                 res.status(500).json({ error: 'Failed to retrieve Appointment' });
             } else if (results.length === 0) {
                 res.status(404).json({ error: 'Appointment not found' });
@@ -44,7 +43,7 @@ router.post('/', (req, res) => {
         [parseInt(Employee_ID), parseInt(Patient_ID), parseInt(Report_ID)],
         (error, results) => {
             if (error) {
-                console.log(error);
+                ;
                 res.status(500).json({ error: 'Failed to create Appointment' });
             } else {
                 res.status(201).json({ message: 'Appointment created successfully' });
@@ -63,7 +62,7 @@ router.put('/:id', (req, res) => {
         [Employee_ID, Patient_ID, Report_ID, appointmentId],
         (error, results) => {
             if (error) {
-                console.log(error)
+                
                 res.status(500).json({ error: 'Failed to update Appointment' });
             } else if (results.affectedRows === 0) {
                 res.status(404).json({ error: 'Appointment not found' });
@@ -83,7 +82,7 @@ router.delete('/:id', (req, res) => {
         [appointmentId],
         (error, results) => {
             if (error) {
-                console.log(error)
+                
                 res.status(500).json({ error: 'Failed to delete Appointment' });
             } else if (results.affectedRows === 0) {
                 res.status(404).json({ error: 'Appointment not found' });
