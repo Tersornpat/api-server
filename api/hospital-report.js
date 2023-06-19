@@ -42,9 +42,9 @@ router.post('/', (req, res) => {
         (error, results) => {
             if (error) {
                 console.log(error)
-                res.status(500).json({ error: 'Failed to create report' });
+                res.status(500).json({ error: `ERROR: Patient_ID: ${Patient_ID}, Employee_ID: ${Employee_ID}, Report_Date: ${Report_Date}, weight: ${weight}, height: ${height}, Pressure: ${Pressure}, BPM: ${BPM}, TEMP: ${Temp}, Symptom: ${Symptom}` });
             } else {
-                res.status(201).json({ message: 'Report created successfully' });
+                res.status(201).json({ message: `Report created successfully xD -> Patient_ID: ${Patient_ID}, Employee_ID: ${Employee_ID}, Report_Date: ${Report_Date}, weight: ${weight}, height: ${height}, Pressure: ${Pressure}, BPM: ${BPM}, TEMP: ${Temp}, Symptom: ${Symptom}` });
             }
         }
     );

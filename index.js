@@ -19,7 +19,7 @@ const proserType = require('./api/hospital-proser-type')
 const proser = require('./api/hospital-proser')
 const report = require('./api/hospital-report')
 const treatment = require('./api/hospital-treatment')
-
+const reportCustom = require('./api/hospital-report-custom')
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -84,6 +84,8 @@ app.use('/report', report)
 //Router /treatment/
 app.use('/treatment', treatment)
 
+//Router /report-custom/ by Green
+app.use('/report-custom', reportCustom)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
