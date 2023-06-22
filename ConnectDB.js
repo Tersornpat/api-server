@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 // Create MySQL connection Localhost
 // const db = mysql.createConnection({
@@ -7,6 +7,7 @@ const mysql = require('mysql');
 //     password: '',
 //     database: 'hospital_db-temp',
 // });
+
 const db = mysql.createConnection({
     host: 'database-kmitl-hospital.cn6cwktodrpj.ap-southeast-1.rds.amazonaws.com',
     user: 'admin',

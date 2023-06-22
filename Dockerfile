@@ -8,16 +8,16 @@ WORKDIR /app
 RUN apk add --update nodejs npm git ncdu fish tree bat
 
 # Clone the GitHub repository into the container
-RUN git clone 
+RUN git clone -b server https://github.com/Tersornpat/api-server.git
 
 # Navigate into the cloned repository directory
-WORKDIR /app/back-hospital
+WORKDIR /app/api-server
 
 # Install dependencies using npm
 RUN npm install
 
 # Expose any required ports for the application
-EXPOSE 3000
+EXPOSE 3030
 
 # Set the default command to run when the container starts
 CMD ["npm", "start"]
