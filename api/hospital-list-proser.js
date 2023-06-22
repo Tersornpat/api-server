@@ -92,7 +92,7 @@ router.delete('/:listProSerId/:code', (req, res) => {
 });
 
 process.on('SIGINT', () => {
-    db.disconnect();
+    db.end();
     process.exit();
 });
 

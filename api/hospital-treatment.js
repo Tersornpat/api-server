@@ -93,7 +93,7 @@ router.delete('/:treatmentId/:labId', (req, res) => {
 
 
 process.on('SIGINT', () => {
-    db.disconnect();
+    db.end();
     process.exit();
 });
 

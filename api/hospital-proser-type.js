@@ -89,7 +89,7 @@ router.delete('/:id', (req, res) => {
 });
 
 process.on('SIGINT', () => {
-    db.disconnect();
+    db.end();
     process.exit();
 });
 
