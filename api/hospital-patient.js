@@ -4,6 +4,7 @@ const db = require('../ConnectDB');
 
 // Retrieve all patients
 router.get('/', (req, res) => {
+    console.log('bonjour!');
     db.query('SELECT * FROM Patient', (error, results) => {
         if (error) {
             res.status(500).json({ error: 'Failed to retrieve patients' });

@@ -8,9 +8,9 @@ const mysql = require('mysql');
 //     database: 'hospital_db-temp',
 // });
 const db = mysql.createConnection({
-    host: 'localhost',
+    host: 'database-kmitl-hospital.cn6cwktodrpj.ap-southeast-1.rds.amazonaws.com',
     user: 'admin',
-    password: 'c68c7ae898b3314ce258b9b4ad52d2321b435a18ba3a8116',
+    password: 'admin1234',
     database: 'hospital_db',
 });
 

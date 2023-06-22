@@ -24,7 +24,7 @@ const reportCustom = require('./api/hospital-report-custom')
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-const port = 4000;
+const port = 3030;
 
 app.get('/', (req, res) => {
     console.log("GET index")
@@ -91,4 +91,4 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
-app.listen(3030)
+// app.listen(3030)
