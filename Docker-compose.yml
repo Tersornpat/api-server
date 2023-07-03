@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  frontend:
+    image: kawhao/kmitl-hospital-frontend:1.0.0
+    ports:
+      - 8000:8000
+    depends_on:
+      - backend
+    hostname: front
+
+  backend:
+    image: kawhao/kmitl-hospital-backend:1.0.0
+    ports:
+      - 3000:3000
+    depends_on:
+      - database
+    hostname: back
+
+  database:
+    image: kawhao/kmitl-hospital-apifordb:1.0.0
+    ports:
+      - 3030:3030
+    hostname: db
+  
+  nginx:
+    image: nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - my-network
+    
+networks:
+  my-network:

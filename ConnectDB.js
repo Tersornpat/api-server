@@ -12,7 +12,7 @@ const db = mysql.createConnection({
     host: 'database-kmitl-hospital.cn6cwktodrpj.ap-southeast-1.rds.amazonaws.com',
     user: 'admin',
     password: 'admin1234',
-    database: 'hospital_db',
+    database: 'hospital_db2',
 });
 
 // Connect to MySQL
